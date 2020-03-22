@@ -1,0 +1,41 @@
+#define NME() NAME
+#define CONCAT(A, B, C) A ## B ## C
+#define __PATH(X) #X
+#define _PATH(X) __PATH(X)
+#define PATH(SUFFIX) _PATH(../build/NME().SUFFIX)
+#if LANG_DE
+	#define LANG_PATH(SUFFIX) _PATH(../build/NME()-de.SUFFIX)
+	#include "../de-txts.h"
+#elif LANG_EN
+	#define LANG_PATH(SUFFIX) _PATH(../build/NME()-en.SUFFIX)
+	#include "../en-txts.h"
+#else
+	#error "no lang"
+#endif
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Playfair Encryption</title>
+		<link rel="stylesheet" href="../dist/bootstrap.min.css">
+		<link rel="stylesheet" href="../dist/template.css">
+		<link rel="stylesheet" href="../dist/custom.css">
+		<link rel="stylesheet" href=PATH(css)>
+	</head>
+	<body>
+		<div class="wrapper mm-page" id="page">
+			<div class="mainbody">
+				<div class="container">
+					<div id="content">
+						<div id="content-area">
+							<div class="item-page">
+								#include LANG_PATH(html)
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src=LANG_PATH(js)></script>
+	</body>
+</html>
