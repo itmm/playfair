@@ -1,0 +1,12 @@
+#define _AS_STRING(X) #X
+#define AS_STRING(X) _AS_STRING(X)
+{
+  "name": AS_STRING(NAME),
+  "styles": [
+  	AS_STRING(./NAME.css)
+  ],
+  "scripts": [
+  	AS_STRING(./NAME-%lang%.js)
+  ],
+  "html": AS_STRING(NAME-%lang%.html)
+}

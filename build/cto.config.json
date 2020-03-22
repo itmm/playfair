@@ -1,0 +1,10 @@
+{
+  "name": "playfair",
+  "styles": [
+   "./playfair.css"
+  ],
+  "scripts": [
+   "./playfair-%lang%.js"
+  ],
+  "html": "playfair-%lang%.html"
+}

@@ -3,7 +3,7 @@
 CFLAGS += -E -P -xc
 TARGETs = build/$(NAME)-de.html build/$(NAME)-en.html build/$(NAME)-de.js \
 	build/$(NAME)-en.js build/$(NAME).css debug/$(NAME)-de.html \
-	debug/$(NAME)-en.html
+	debug/$(NAME)-en.html build/cto.config.json
 
 all: dirs $(TARGETs)
 
@@ -30,6 +30,10 @@ build/$(NAME)-de.js: $(NAME).js de-txts.h
 build/$(NAME)-en.js: $(NAME).js en-txts.h
 	@echo "BUILD $@"
 	$(CC) $(CFLAGS) -DLANG_EN=1 -DFILE=$(NAME).js dist/localize.h >$@
+
+build/cto.config.json: dist/cto.config.json
+	@echo "BULID $@"
+	$(CC) $(CFLAGS) -DNAME=$(NAME) $^ >$@
 
 debug/$(NAME)-de.html: build/$(NAME)-de.html
 	@echo "DEBUG $@"
