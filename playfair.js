@@ -5,18 +5,26 @@ window.addEventListener('load', () => {
 
 	/// normalizes a char
 	const norm = ch => {
-		const u = ch.toUpperCase();
-		if (u < 'A' || u > 'Z') { return null; }
-		if (u === 'J') { return 'I'; }
-		return u;
+		if (ch < 'A' || ch > 'Z') { return null; }
+		if (ch === 'J') { return 'I'; }
+		return ch;
+	};
+
+	const normalize = str => {
+		let s = str.toUpperCase();
+		s = s.replace("Ä", "AE");
+		s = s.replace("Ö", "OE");
+		s = s.replace("Ü", "UE");
+		return s.normalize('NFKD').replace(/[^\w]/g, '');
 	};
 
 	/// build table from key as one big string
 	const build_table = key => {
+		const k = normalize(key);
 		let result = "";
 		let used = {};
-		for (let i = 0; i < key.length; ++i) {
-			const c = norm(key.charAt(i));
+		for (let i = 0; i < k.length; ++i) {
+			const c = norm(k.charAt(i));
 			if (! c || used[c]) { continue; }
 			result += c;
 			used[c] = true;
@@ -83,11 +91,12 @@ window.addEventListener('load', () => {
 	/// transform a message based on pairs
 	//	enc is needed, because no padding is performed on decode
 	const transform = (msg, enc, pairs) => {
+		let m = normalize(msg);
 		let last = '';
 		let cur = '';
 		let result = "";
-		for (let i = 0; i < msg.length; ++i) {
-			const c = norm(msg.charAt(i));
+		for (let i = 0; i < m.length; ++i) {
+			const c = norm(m.charAt(i));
 			if (! c) { continue; }
 			if (enc && last === c) {
 				cur += 'X'; last = ''; --i;
