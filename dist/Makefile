@@ -31,7 +31,7 @@ build/cto.config.json: dist/cto.config.json
 debug/$(NAME)-de.html: build/$(NAME)-de.html
 	$(CC) $(CFLAGS) -DLANG_DE=1 -DNAME=$(NAME) dist/template.html >$@
 
-debug/$(NAME)-en.html: build/$(NAME)-de.html
+debug/$(NAME)-en.html: build/$(NAME)-en.html
 	$(CC) $(CFLAGS) -DLANG_EN=1 -DNAME=$(NAME) dist/template.html >$@
 
 clean:
