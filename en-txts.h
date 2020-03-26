@@ -1,4 +1,4 @@
-#define LOC_KEY() Key word::
+#define LOC_KEY() Keyword:
 #define LOC_PLAIN() Plaintext:
 #define LOC_FIRST_MSG() "WAITINTHEWOODS"
 #define LOC_CIPHER() Ciphertext:
