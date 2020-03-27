@@ -234,4 +234,8 @@ window.addEventListener('load', () => {
 		evt.preventDefault();
 		update_msg(false);
 	});
+	$direction.addEventListener('click', evt => {
+		evt.preventDefault();
+		update_msg(! encrypt);
+	});
 });
